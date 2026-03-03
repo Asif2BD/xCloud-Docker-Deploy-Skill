@@ -1,6 +1,6 @@
 ---
 name: xcloud-docker-deploy
-description: "Adapt any docker-compose.yml to deploy on xCloud. Handles 4 common blockers: (1) build-from-source apps — generates GitHub Actions to build/push to GHCR; (2) proxy conflicts (Caddy/Traefik/nginx-proxy) — removes them, adds nginx-router with single port; (3) multi-port apps — routes all services through nginx-router; (4) external config files — embeds inline. Use when a user wants to deploy any Docker app on xCloud and has an incompatible docker-compose.yml, or asks make this work on xCloud."
+description: "Deploy any project on xCloud — detects stack (WordPress, Laravel, PHP, Node.js, Next.js, Python, Go, Rust, Docker), chooses native or Docker path, generates all needed files (Dockerfile, docker-compose.yml, GitHub Actions, .env.example), and provides exact xCloud UI steps. Works from zero — no existing Docker setup required."
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -27,6 +27,28 @@ git push → xCloud runs: docker-compose pull && docker-compose up -d
 **xCloud never runs `docker build`.** Images must be pre-built in a public registry. SSL, reverse proxy, and domain routing are handled by xCloud — your stack must not duplicate them.
 
 Read `references/xcloud-constraints.md` for the full ruleset before making changes.
+
+---
+
+## Phase 0 — Detect Project Type First
+
+**Before anything else, scan the project directory for these files:**
+
+Read `DETECT.md` for full detection rules. Quick routing:
+
+| Found in project | Stack | Action |
+|---|---|---|
+| `wp-config.php` or `wp-content/` | WordPress | Read `references/xcloud-native-wordpress.md` |
+| `composer.json` + `artisan` | Laravel | Read `references/xcloud-native-laravel.md` |
+| `package.json` + `next.config.*` | Next.js | Docker path → use `dockerfiles/nextjs.Dockerfile` + `compose-templates/nextjs-postgres.yml` |
+| `package.json` (no framework config) | Node.js | Read `references/xcloud-native-nodejs.md` |
+| `composer.json` (no artisan) | PHP | Read `references/xcloud-native-php.md` |
+| `requirements.txt` or `pyproject.toml` | Python | Docker path → use `dockerfiles/python-fastapi.Dockerfile` |
+| `go.mod` | Go | Docker path — generate Dockerfile manually |
+| `docker-compose.yml` exists | Existing Docker | Proceed to Step 1 below |
+| `Dockerfile` (no compose) | Build-from-source | Generate compose → Scenario A below |
+
+See `references/xcloud-deploy-paths.md` for the Native vs Docker decision guide.
 
 ---
 
