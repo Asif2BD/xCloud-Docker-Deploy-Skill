@@ -1,3 +1,20 @@
+## [1.2.0] - 2026-03-03
+
+### Added
+- `skill.json` — machine-readable metadata for SkillsMP, ClawHub, and all AI agent indexers
+- `.github/skillsmp.yml` — SkillsMP-specific indexing configuration
+- `.github/FUNDING.yml` — GitHub project maintenance signal
+- `CONTRIBUTING.md` — community contribution guide (how to add stacks, fix bugs, add examples)
+
+### Changed
+- `README.md` — complete rewrite with badges, multi-platform install guide, stack table, file structure tree
+- `SKILL.md` frontmatter — enriched with `tags` (YAML array, 14 tags), `category`, `version`, `author`, `platforms` list, `install` block; compatible with all major indexers
+
+### Notes
+- No behavior changes — purely metadata and documentation improvements
+- Fully ready for SkillsMP indexing, ClawHub, vibe-coding platforms, Claude.ai Projects, Cursor, Windsurf
+
+
 ## [1.1.0] - 2026-03-03
 
 ### Added

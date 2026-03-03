@@ -1,60 +1,34 @@
 # xCloud Docker Deploy Skill
 
-[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](CHANGELOG.md)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
-[![ClawHub](https://img.shields.io/badge/ClawHub-install-blue.svg)](https://clawhub.ai/Asif2BD/xcloud-docker-deploy)
-[![SkillsMP](https://img.shields.io/badge/SkillsMP-indexed-purple.svg)](https://skillsmp.com)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-orange.svg)](https://claude.ai/code)
-[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-compatible-brightgreen.svg)](https://github.com/openai/codex)
-[![xCloud](https://img.shields.io/badge/platform-xcloud.host-ff6b35.svg)](https://xcloud.host)
+> **For AI Agents:** Auto-detect any project stack and deploy it to [xCloud](https://xcloud.host) — native or Docker path, zero config required.
 
-> **Deploy any project on xCloud — from zero to live in minutes.**  
-> Auto-detects your stack, chooses the right deployment path, generates all needed files.
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases)
+[![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
+[![SkillsMP](https://img.shields.io/badge/SkillsMP-listed-purple)](https://skillsmp.com)
+[![ClawHub](https://img.shields.io/badge/ClawHub-published-orange)](https://clawhub.ai/Asif2BD/xcloud-docker-deploy)
+[![Platforms](https://img.shields.io/badge/platforms-Claude%20Code%20%7C%20Codex%20%7C%20OpenClaw%20%7C%20Cursor-lightgrey)](#install)
 
 ---
 
 ## What It Does
 
-### Phase 0 — Smart Stack Detection
+Paste a project structure or `docker-compose.yml` and ask the AI to deploy it on xCloud. The skill:
 
-The skill **automatically detects your project type** before doing anything:
+1. **Detects your stack** — WordPress, Laravel, PHP, Node.js, Next.js, NestJS, Nuxt, Python, Go, Rust, or existing Docker
+2. **Picks the right path** — xCloud Native deploy vs Docker
+3. **Generates all files** — Dockerfile, docker-compose.yml, GitHub Actions CI/CD, .env.example
+4. **Gives exact xCloud UI steps** — copy-paste ready
 
-| Stack Detected | Recommended Path |
-|---|---|
-| WordPress | xCloud Native (1-click or Git) |
-| Laravel | xCloud Native (composer + artisan) |
-| PHP (generic) | xCloud Native |
-| Node.js / Express | xCloud Native |
-| Next.js / NestJS / Nuxt | Docker (build step required) |
-| Python (FastAPI / Django) | Docker |
-| Go / Rust | Docker |
-| Existing docker-compose.yml | Adapt → Scenario A/B/C |
-
-### Phase 1 — Docker Compose Adaptation
-
-For existing Docker projects, handles 4 common xCloud blockers:
+### What It Handles
 
 | Scenario | Signal | Fix |
-|---|---|---|
-| **Build-from-source** | `build: context: .` in compose | Generates GitHub Actions → builds → pushes to GHCR; replaces `build:` with `image: ghcr.io/...` |
-| **Proxy conflict** | Caddy/Traefik/nginx-proxy service | Removes it, adds `nginx-router` with inline config, single port |
-| **Multi-port** | Multiple `ports:` on different services | Routes all traffic through `nginx-router`, single exposed port |
-| **External config files** | `./nginx.conf:/etc/nginx/...` | Embeds inline via `configs:` block |
-
----
-
-## Quick Start
-
-Once installed, just say:
-
-> **"Make this work on xCloud"** — paste any `docker-compose.yml`, project files, or just your repo structure.
-
-The skill detects your stack and produces:
-- ✅ Modified `docker-compose.yml` (xCloud-compatible)
-- ✅ `Dockerfile` (if needed — from templates)
-- ✅ GitHub Actions workflow (for GHCR image builds)
-- ✅ `.env.example` with all required variables
-- ✅ Step-by-step xCloud UI deploy instructions
+|----------|--------|-----|
+| **Stack detection** | Any project files | Auto-routes to native or Docker path |
+| **Build-from-source** | `build: context: .` in compose | GitHub Actions → GHCR; replaces `build:` with `image:` |
+| **Proxy conflict** | Caddy/Traefik/nginx-proxy service | Removes it, adds embedded nginx-router |
+| **Multi-port** | Multiple `ports:` on different services | Routes through nginx-router, single exposed port |
+| **External config** | `./nginx.conf:/etc/nginx/...` | Embeds config inline via `configs:` block |
+| **No Docker at all** | WordPress/Laravel/Node.js project | Native xCloud deploy guide |
 
 ---
 
@@ -62,138 +36,116 @@ The skill detects your stack and produces:
 
 ### Claude Code (CLI)
 ```bash
-# Option 1: Install via ClawHub CLI
+# From ClawHub
 clawhub install xcloud-docker-deploy
 
-# Option 2: Download .skill file directly
-curl -L https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases/latest/download/xcloud-docker-deploy.skill \
-  -o ~/.claude/skills/xcloud-docker-deploy.skill
+# Or manually
+git clone https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill.git
+cp -r xCloud-Docker-Deploy-Skill ~/.claude/skills/xcloud-docker-deploy
 ```
 
 ### OpenAI Codex CLI
 ```bash
-curl -L https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases/latest/download/xcloud-docker-deploy.skill \
-  -o ~/.codex/skills/xcloud-docker-deploy.skill
-```
-
-### Claude.ai Projects
-Download [`xcloud-docker-deploy.skill`](https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases/latest/download/xcloud-docker-deploy.skill) and upload to your Claude Project files.
-
-### OpenClaw
-```bash
-clawhub install Asif2BD/xcloud-docker-deploy
-```
-
-### Cursor / Windsurf / Any AI Agent
-Drop `xcloud-docker-deploy.skill` into the agent's `skills/` or workspace folder, or reference `SKILL.md` directly in your agent's context.
-
-### Manual / Self-hosted
-```bash
 git clone https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill.git
-# Add SKILL.md to your agent's context
+cp -r xCloud-Docker-Deploy-Skill ~/.codex/skills/xcloud-docker-deploy
 ```
+
+### OpenClaw Agent
+Drop the skill folder into your agent's `skills/` workspace directory.
+
+### Claude.ai (Projects)
+Upload `SKILL.md` to your Project files. The AI will use it as context automatically.
+
+### Cursor / Windsurf / Any AI IDE
+Add `SKILL.md` contents to your system prompt or project rules file.
 
 ---
 
-## What's Included
+## Usage
+
+Once installed, just describe what you want:
+
+```
+"Make this docker-compose.yml work on xCloud"
+"Deploy my Laravel app to xCloud"
+"My Next.js app needs to run on xCloud, help me set it up"
+"Convert this Caddy + React + API stack for xCloud"
+```
+
+The agent reads DETECT.md first, identifies your stack, then follows the appropriate guide.
+
+---
+
+## Supported Stacks
+
+| Stack | Deploy Path | Files Provided |
+|-------|-------------|----------------|
+| WordPress | xCloud Native | Step-by-step UI guide |
+| Laravel | xCloud Native | Deploy hooks, queue worker config |
+| PHP (generic) | xCloud Native | Web root config, Composer hooks |
+| Node.js / Express | xCloud Native | PORT env setup |
+| Next.js | Docker | `dockerfiles/nextjs.Dockerfile` + `compose-templates/nextjs-postgres.yml` |
+| NestJS | Docker | Generated Dockerfile + compose |
+| Python / FastAPI | Docker | `dockerfiles/python-fastapi.Dockerfile` + compose with Celery |
+| Go | Docker | Generated Dockerfile + compose |
+| Existing Docker | Adapt | Scenario A/B/C transformation |
+
+---
+
+## Skill Structure
 
 ```
 xcloud-docker-deploy/
-├── SKILL.md                              # Core agent instructions
-├── DETECT.md                             # Stack fingerprinting rules
-├── README.md                             # This file
-├── SECURITY.md                           # Security disclosure
-├── CHANGELOG.md                          # Version history
-├── LICENSE                               # Apache 2.0
-│
-├── assets/
-│   └── github-actions-build.yml          # Ready-to-use GitHub Actions workflow
-│
-├── dockerfiles/
-│   ├── laravel.Dockerfile                # Multi-stage PHP 8.3-fpm-alpine
-│   ├── nextjs.Dockerfile                 # 3-stage Next.js standalone
-│   ├── node-app.Dockerfile               # Multi-stage Node.js 20-alpine
-│   ├── php-generic.Dockerfile            # PHP 8.3-apache (Symfony, CI4, Slim)
-│   └── python-fastapi.Dockerfile         # Python 3.12-slim + uvicorn
-│
-├── compose-templates/
-│   ├── laravel-mysql.yml                 # Laravel + Nginx + MySQL 8 + Redis 7 + Queue
-│   ├── nextjs-postgres.yml              # Next.js + PostgreSQL 16
-│   ├── nodejs-api-postgres.yml          # Node.js API + PostgreSQL 16
-│   └── python-fastapi-postgres.yml      # FastAPI + PostgreSQL + Redis + Celery
-│
+├── SKILL.md                          ← Main skill instructions (load this)
+├── DETECT.md                         ← Stack fingerprinting rules
 ├── references/
-│   ├── xcloud-constraints.md            # xCloud rules & architecture
-│   ├── xcloud-deploy-paths.md           # Native vs Docker decision guide
-│   ├── xcloud-native-wordpress.md       # WordPress native deploy guide
-│   ├── xcloud-native-laravel.md         # Laravel native deploy guide
-│   ├── xcloud-native-nodejs.md          # Node.js native deploy guide
-│   ├── xcloud-native-php.md             # PHP native deploy guide
-│   ├── scenario-build-source.md         # Docker Scenario A deep-dive
-│   ├── scenario-proxy-conflict.md       # Docker Scenario B deep-dive
-│   └── scenario-multi-service-build.md  # Docker Scenario C deep-dive
-│
+│   ├── xcloud-constraints.md         ← Platform rules (must-read)
+│   ├── xcloud-deploy-paths.md        ← Native vs Docker decision matrix
+│   ├── xcloud-native-wordpress.md    ← WordPress deploy guide
+│   ├── xcloud-native-laravel.md      ← Laravel deploy guide
+│   ├── xcloud-native-nodejs.md       ← Node.js deploy guide
+│   ├── xcloud-native-php.md          ← PHP deploy guide
+│   ├── scenario-build-source.md      ← Scenario A deep-dive
+│   ├── scenario-proxy-conflict.md    ← Scenario B deep-dive
+│   └── scenario-multi-service-build.md ← Scenario C deep-dive
+├── dockerfiles/
+│   ├── laravel.Dockerfile            ← PHP 8.3-fpm-alpine, multi-stage
+│   ├── nextjs.Dockerfile             ← 3-stage standalone build
+│   ├── node-app.Dockerfile           ← Node 20-alpine, non-root
+│   ├── php-generic.Dockerfile        ← PHP 8.3-apache + mod_rewrite
+│   └── python-fastapi.Dockerfile     ← Python 3.12-slim + uvicorn
+├── compose-templates/
+│   ├── laravel-mysql.yml             ← PHP-FPM + nginx + MySQL + Redis
+│   ├── nextjs-postgres.yml           ← Next.js + PostgreSQL
+│   ├── nodejs-api-postgres.yml       ← Node API + PostgreSQL
+│   └── python-fastapi-postgres.yml   ← FastAPI + PostgreSQL + Celery
+├── assets/
+│   └── github-actions-build.yml      ← GitHub Actions GHCR build workflow
 └── examples/
-    ├── laravel-app.md                    # End-to-end: Laravel → xCloud Native
-    ├── nextjs-app.md                     # End-to-end: Next.js → xCloud Docker
-    ├── rybbit-analytics.md               # Real-world: Caddy + multi-port
-    ├── custom-app-dockerfile.md          # Real-world: build-from-source
-    └── fullstack-monorepo.md             # Real-world: multi-service build
+    ├── rybbit-analytics.md           ← Caddy + multi-port (Scenario B)
+    ├── custom-app-dockerfile.md      ← Build-from-source (Scenario A)
+    ├── fullstack-monorepo.md         ← Multi-service (Scenario C)
+    ├── laravel-app.md                ← Laravel native deploy
+    └── nextjs-app.md                 ← Next.js Docker deploy
 ```
 
 ---
 
-## Compatibility
+## About xCloud
 
-| Platform | Install Method | Status |
-|---|---|---|
-| **Claude Code** (Anthropic) | `.skill` file in `~/.claude/skills/` | ✅ Full support |
-| **OpenAI Codex CLI** | `.skill` file in `~/.codex/skills/` | ✅ Full support |
-| **Claude.ai Projects** | Upload `.skill` to Project files | ✅ Full support |
-| **OpenClaw** | `clawhub install` | ✅ Native |
-| **Cursor** | Add to project context | ✅ Partial |
-| **Windsurf** | Add to project context | ✅ Partial |
-| **Any LLM agent** | Reference `SKILL.md` directly | ✅ Universal |
-
----
-
-## xCloud-Specific Context
-
-This skill is built around [xCloud.host](https://xcloud.host) constraints:
-
-- ✅ No `build:` directives in compose — images must be pre-built
-- ✅ Single exposed port only — SSL/reverse proxy handled by xCloud
-- ✅ No bundled proxy containers (Caddy/Traefik/nginx-proxy) — conflicts with xCloud's proxy layer
-- ✅ Config files must be inline (via Docker `configs:` block) — external file mounts may not persist
-
----
-
-## Examples
-
-### Rybbit Analytics (Caddy + multi-port)
-Detected: Existing Docker stack with Caddy proxy + multiple services → Scenario B  
-Fix: Remove Caddy, add nginx-router, single port 3080
-
-### Next.js App (build-from-source)
-Detected: Next.js → Docker path → use `dockerfiles/nextjs.Dockerfile` + `compose-templates/nextjs-postgres.yml`  
-Fix: Add `output: 'standalone'`, generate GHCR workflow, expose port 3000
-
-### Laravel App (native deploy)
-Detected: `composer.json` + `artisan` → xCloud Native  
-Fix: No Docker needed — composer install + artisan deploy hooks directly in xCloud UI
+[xCloud](https://xcloud.host) is a git-push Docker deployment platform. Push your repo, xCloud runs `docker-compose pull && docker-compose up -d`. It handles SSL, reverse proxy, and domain routing automatically — your stack must not duplicate those.
 
 ---
 
 ## Author
 
-Built by **M Asif Rahman** ([@Asif2BD](https://github.com/Asif2BD))
+**M Asif Rahman** — [@Asif2BD](https://github.com/Asif2BD)
 
-- GitHub: [Asif2BD/xCloud-Docker-Deploy-Skill](https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill)
 - ClawHub: [clawhub.ai/Asif2BD/xcloud-docker-deploy](https://clawhub.ai/Asif2BD/xcloud-docker-deploy)
-- xCloud: [xcloud.host](https://xcloud.host)
+- SkillsMP: [skillsmp.com](https://skillsmp.com)
 
 ---
 
 ## License
 
-[Apache 2.0](LICENSE) — free to use, modify, and distribute.
+Apache 2.0 — free to use, modify, and distribute.
