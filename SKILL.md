@@ -1,17 +1,45 @@
 ---
 name: xcloud-docker-deploy
-description: "Deploy any project on xCloud — detects stack (WordPress, Laravel, PHP, Node.js, Next.js, Python, Go, Rust, Docker), chooses native or Docker path, generates all needed files (Dockerfile, docker-compose.yml, GitHub Actions, .env.example), and provides exact xCloud UI steps. Works from zero — no existing Docker setup required."
+description: "Deploy any project to xCloud hosting — auto-detects stack (WordPress, Laravel, PHP, Node.js, Next.js, NestJS, Python, Go, Rust), routes to native or Docker deployment, generates production-ready Dockerfile, docker-compose.yml, GitHub Actions CI/CD, and .env.example. Works from zero Docker setup."
 license: Apache-2.0
-metadata:
-  version: 1.0.0
-  author: Asif2BD
-  homepage: https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill
-  source: https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill
-  tags: docker, xcloud, deployment, devops, docker-compose
-  platforms: openClaw, claude-code, claude-ai, cursor, windsurf, any
-  security_verified: true
+version: "1.1.0"
+author: "M Asif Rahman"
+homepage: "https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill"
+repository: "https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill"
+tags:
+  - docker
+  - deployment
+  - devops
+  - xcloud
+  - docker-compose
+  - github-actions
+  - wordpress
+  - laravel
+  - nextjs
+  - nodejs
+  - python
+  - ci-cd
+  - hosting
+  - infrastructure
+category: "DevOps & Deployment"
+platforms:
+  - claude-code
+  - openClaw
+  - claude-ai
+  - cursor
+  - windsurf
+  - codex
+  - any
+security:
+  verified: true
   no_network_calls: true
   no_executables: true
+  sandboxed: true
+install: |
+  # Claude Code / Codex CLI
+  cp -r xcloud-docker-deploy ~/.claude/skills/
+  # OpenClaw
+  # Drop skill folder into agent workspace skills/
 ---
 
 # xCloud Docker Deploy
