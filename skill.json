@@ -1,9 +1,9 @@
 {
   "name": "xcloud-docker-deploy",
   "displayName": "xCloud Docker Deploy",
-  "version": "1.1.0",
-  "description": "Deploy any project to xCloud hosting — auto-detects stack (WordPress, Laravel, PHP, Node.js, Next.js, NestJS, Python, Go, Rust), routes to native or Docker deployment, generates production-ready Dockerfile, docker-compose.yml, GitHub Actions CI/CD, and .env.example.",
-  "longDescription": "A full project-aware deployment assistant for xCloud hosting. Phase 0 auto-detects the project stack from file signals and routes to the optimal deployment path — either xCloud Native (WordPress, Laravel, PHP, Node.js) or Docker (Next.js, Python, Go, NestJS). Includes production-ready Dockerfile templates, pre-configured docker-compose stacks, GitHub Actions CI/CD workflows, and step-by-step xCloud UI guides. Works from zero — no existing Docker setup required.",
+  "version": "1.2.0",
+  "description": "Deploy any project to xCloud hosting \u2014 auto-detects stack (WordPress, Laravel, PHP, Node.js, Next.js, NestJS, Python, Go, Rust), routes to native or Docker deployment, generates production-ready Dockerfile, docker-compose.yml, GitHub Actions CI/CD, and .env.example.",
+  "longDescription": "A full project-aware deployment assistant for xCloud hosting. Phase 0 auto-detects the project stack from file signals and routes to the optimal deployment path \u2014 either xCloud Native (WordPress, Laravel, PHP, Node.js) or Docker (Next.js, Python, Go, NestJS). Includes production-ready Dockerfile templates, pre-configured docker-compose stacks, GitHub Actions CI/CD workflows, and step-by-step xCloud UI guides. Works from zero \u2014 no existing Docker setup required.",
   "author": {
     "name": "M Asif Rahman",
     "github": "Asif2BD",
@@ -14,12 +14,36 @@
   "repository": "https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill",
   "category": "DevOps & Deployment",
   "tags": [
-    "docker", "deployment", "devops", "xcloud", "docker-compose",
-    "github-actions", "wordpress", "laravel", "nextjs", "nodejs",
-    "python", "ci-cd", "hosting", "infrastructure", "php", "fastapi",
-    "nginx", "ghcr", "stack-detection", "vibe-coding"
+    "docker",
+    "deployment",
+    "devops",
+    "xcloud",
+    "docker-compose",
+    "github-actions",
+    "wordpress",
+    "laravel",
+    "nextjs",
+    "nodejs",
+    "python",
+    "ci-cd",
+    "hosting",
+    "infrastructure",
+    "php",
+    "fastapi",
+    "nginx",
+    "ghcr",
+    "stack-detection",
+    "vibe-coding"
   ],
-  "platforms": ["claude-code", "codex", "openClaw", "claude-ai", "cursor", "windsurf", "any"],
+  "platforms": [
+    "claude-code",
+    "codex",
+    "openClaw",
+    "claude-ai",
+    "cursor",
+    "windsurf",
+    "any"
+  ],
   "entrypoint": "SKILL.md",
   "files": {
     "main": "SKILL.md",
@@ -38,7 +62,19 @@
     "native-deploy-guide",
     "env-generation"
   ],
-  "stacks": ["wordpress", "laravel", "php", "nodejs", "nextjs", "nestjs", "nuxt", "python", "go", "rust", "docker"],
+  "stacks": [
+    "wordpress",
+    "laravel",
+    "php",
+    "nodejs",
+    "nextjs",
+    "nestjs",
+    "nuxt",
+    "python",
+    "go",
+    "rust",
+    "docker"
+  ],
   "security": {
     "verified": true,
     "no_network_calls": true,

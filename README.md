@@ -2,7 +2,7 @@
 
 > **For AI Agents:** Auto-detect any project stack and deploy it to [xCloud](https://xcloud.host) — native or Docker path, zero config required.
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue)](https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
 [![SkillsMP](https://img.shields.io/badge/SkillsMP-listed-purple)](https://skillsmp.com)
 [![ClawHub](https://img.shields.io/badge/ClawHub-published-orange)](https://clawhub.ai/Asif2BD/xcloud-docker-deploy)

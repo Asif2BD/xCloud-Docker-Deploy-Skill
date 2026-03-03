@@ -2,7 +2,7 @@
 name: xcloud-docker-deploy
 description: "Deploy any project to xCloud hosting — auto-detects stack (WordPress, Laravel, PHP, Node.js, Next.js, NestJS, Python, Go, Rust), routes to native or Docker deployment, generates production-ready Dockerfile, docker-compose.yml, GitHub Actions CI/CD, and .env.example. Works from zero Docker setup."
 license: Apache-2.0
-version: "1.1.0"
+version: "1.2.0"
 author: "M Asif Rahman"
 homepage: "https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill"
 repository: "https://github.com/Asif2BD/xCloud-Docker-Deploy-Skill"
